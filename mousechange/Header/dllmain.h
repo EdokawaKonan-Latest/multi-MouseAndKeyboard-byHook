@@ -13,8 +13,8 @@ BOOL APIENTRY DllMain( HMODULE hModule,
                        );
 void Test();
 void RawRegister(HWND hWnd);
-int GetDeviceCount();
-ULONG GetButton(int Index);
+int GetMouseCount();
+ULONG GetMouseButton(int Index);
 USHORT GetDistance(int Index);
 int GetData(int Index, int XY);
 void PositiveDirectionX(int id);

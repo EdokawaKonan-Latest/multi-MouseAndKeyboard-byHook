@@ -4,8 +4,8 @@ import GetMouseData 1.0
 
 Window {
     visible: true
-    width: 1280
-    height: 720
+    width: 1000
+    height: 1000
     title: qsTr("RawInputDemo2022")
     function buttonDetect(i) {
         if(i === 0)
@@ -28,28 +28,41 @@ Window {
     function mousePositon(p) {
         var array = ["blue", "yellow", "red"];
         var a = mouseData.getButton(p);
+        var x = mouseData.getX(p);
+        var y = mouseData.getY(p);
+        var k = mouseData.getKind(p);
+        if(k === 2) {
+            var t = x;
+            x = y;
+            y = t;
+        } else if(k === 4) {
+            t = x;
+            x = y;
+            y = t;
+        }
+
         if(p === 0) {
             //console.log("one", mouseData.getDistance(p));
-            mouseOne.x = mouseData.getX(p);
-            mouseOne.y = mouseData.getY(p);
+            mouseOne.x = x;
+            mouseOne.y = y;
             mouseOne.color = array[buttonDetect(a)];
         }
         else if (p === 1) {
             //console.log("two", mouseData.getDistance(p));
-            mouseTwo.x = mouseData.getX(p);
-            mouseTwo.y = mouseData.getY(p);
+            mouseTwo.x = x;
+            mouseTwo.y = y;
             mouseTwo.color = array[buttonDetect(a)];
         }
         else if (p === 2) {
             //console.log("three", mouseData.getDistance(p));
-            mouseThree.x = mouseData.getX(p);
-            mouseThree.y = mouseData.getY(p);
+            mouseThree.x = x;
+            mouseThree.y = y;
             mouseThree.color = array[buttonDetect(a)];
         }
         else if (p === 3) {
             //console.log("four", mouseData.getDistance(p));
-            mouseFour.x = mouseData.getX(p);
-            mouseFour.y = mouseData.getY(p);
+            mouseFour.x = x;
+            mouseFour.y = y;
             mouseFour.color = array[buttonDetect(a)];
         }
     }

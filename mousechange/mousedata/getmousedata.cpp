@@ -47,7 +47,7 @@ GetMouseData::GetMouseData() {
 }
 //获取鼠标按键信息
 unsigned long long GetMouseData::getButton(int p) {
-    return  GetButton(p);
+    return  GetMouseButton(p);
 }
 unsigned short GetMouseData::getDistance(int p) {
     return GetDistance(p);
@@ -62,21 +62,40 @@ int GetMouseData::getY(int p) {
 }
 //获取鼠标设备个数
 int GetMouseData::mouseCount() {
-    return GetDeviceCount();
+    return GetMouseCount();
 }
-
+//设置鼠标1状态
+int GetMouseData::setMouse(int id, int i) {
+    if(i == 1) { //鼠标id   第i种状态
+        PositiveDirectionX(id);
+        PositiveDirectionY(id);
+        return 1;
+    }
+    else if(i == 2) { //
+        PositiveDirectionX(id);
+        OppositeDirectionY(id);
+        return 2;
+    }
+    else if(i == 3) {
+        OppositeDirectionX(id);
+        OppositeDirectionY(id);
+        return 3;
+    }
+    else if(i == 4) {
+        OppositeDirectionX(id);
+        PositiveDirectionY(id);
+        return 4;
+    }
+}
+int arr[10];
+int GetMouseData::getKind(int id) { //获取鼠标种类
+    return arr[id];
+}
 //更改鼠标移动方向
 void GetMouseData::init() {
-    //x方向
-    PositiveDirectionX(0);
-    PositiveDirectionX(1);
-    PositiveDirectionX(2);
-    PositiveDirectionX(3);
-
-    //y方向
-    PositiveDirectionY(0);
-    PositiveDirectionY(1);
-    PositiveDirectionY(2);
-    PositiveDirectionY(3);
+    arr[0] = setMouse(0, 1);
+    arr[1] = setMouse(1, 1);
+    arr[2] = setMouse(2, 1);
+    arr[3] = setMouse(3, 1);
     this->start();
 }
