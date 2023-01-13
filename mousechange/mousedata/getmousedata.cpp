@@ -1,13 +1,13 @@
-ï»¿#pragma once
+#pragma once
 #include <Header/getmousedata.h>
 #include <Header/dllmain.h>
 
-//å£°æ˜Dllå¥æŸ„
+//ÉùÃ÷Dll¾ä±ú
 HMODULE hDll = NULL;
 HWND hWnd = NULL;
 const char * title ="RawInputDemo2022";
 bool add[6];
-//é¼ æ ‡å‡ºç°ä»¥åŠåæ ‡åˆå§‹åŒ–ä¿¡å·
+//Êó±ê³öÏÖÒÔ¼°×ø±ê³õÊ¼»¯ĞÅºÅ
 void GetMouseData::countAdd(int i) {
     if(add[i]) return;
     else {
@@ -27,46 +27,45 @@ void GetMouseData::countAdd(int i) {
         }
     }
 }
-//å¤šçº¿ç¨‹run
+//¶àÏß³Ìrun
 void GetMouseData::run() {
     do {
-        hWnd = ::FindWindowA(NULL, title);//æ‰¾åˆ°qmlçª—å£ å¹¶ä¸”å‹¾ä½
+        hWnd = ::FindWindowA(NULL, title);//ÕÒµ½qml´°¿Ú ²¢ÇÒ¹´×¡
         Sleep(1);
-    } while(hWnd==GetDesktopWindow());//åªè¦æ˜¯windowsçª—å£,æˆ‘å°±ä¸€ç›´æ‰¾å°±å®Œäº†
-    //é¼ æ ‡ä¿¡æ¯çš„æ³¨å†Œ
+    } while(hWnd==GetDesktopWindow());//Ö»ÒªÊÇwindows´°¿Ú,ÎÒ¾ÍÒ»Ö±ÕÒ¾ÍÍêÁË
+    //Êó±êĞÅÏ¢µÄ×¢²á
     RawRegister(hWnd);
     while(1) {
-        //è¾“å‡ºé¼ æ ‡çš„ä¿¡æ¯
+        //Êä³öÊó±êµÄĞÅÏ¢
         countAdd(mouseCount());
+//        qDebug() << getKeyString(0);
         emit mouse();
         Sleep(10);
     }
 }
-GetMouseData::GetMouseData() {
-
-}
-//è·å–é¼ æ ‡æŒ‰é”®ä¿¡æ¯
+GetMouseData::GetMouseData() {}
+//»ñÈ¡Êó±ê°´¼üĞÅÏ¢
 unsigned long long GetMouseData::getButton(int p) {
     return  GetMouseButton(p);
 }
 unsigned short GetMouseData::getDistance(int p) {
     return GetDistance(p);
 }
-//è·å–é¼ æ ‡xåæ ‡
+//»ñÈ¡Êó±êx×ø±ê
 int GetMouseData::getX(int p) {
     return GetData(p, 1);
 }
-//è·å–é¼ æ ‡yåæ ‡
+//»ñÈ¡Êó±êy×ø±ê
 int GetMouseData::getY(int p) {
     return GetData(p, 0);
 }
-//è·å–é¼ æ ‡è®¾å¤‡ä¸ªæ•°
+//»ñÈ¡Êó±êÉè±¸¸öÊı
 int GetMouseData::mouseCount() {
     return GetMouseCount();
 }
-//è®¾ç½®é¼ æ ‡1çŠ¶æ€
+//ÉèÖÃÊó±ê1×´Ì¬
 int GetMouseData::setMouse(int id, int i) {
-    if(i == 1) { //é¼ æ ‡id   ç¬¬iç§çŠ¶æ€
+    if(i == 1) { //Êó±êid   µÚiÖÖ×´Ì¬
         PositiveDirectionX(id);
         PositiveDirectionY(id);
         return 1;
@@ -88,11 +87,16 @@ int GetMouseData::setMouse(int id, int i) {
     }
 }
 int arr[10];
-int GetMouseData::getKind(int id) { //è·å–é¼ æ ‡ç§ç±»
+int GetMouseData::getKind(int id) { //»ñÈ¡Êó±êÖÖÀà
     return arr[id];
 }
-//æ›´æ”¹é¼ æ ‡ç§»åŠ¨æ–¹å‘
+
+QString GetMouseData::getKeyString(int p) {
+    return GetKeyString(p);
+}
+//¸ü¸ÄÊó±êÒÆ¶¯·½Ïò
 void GetMouseData::init() {
+    KeyValueInit();
     arr[0] = setMouse(0, 1);
     arr[1] = setMouse(1, 1);
     arr[2] = setMouse(2, 1);

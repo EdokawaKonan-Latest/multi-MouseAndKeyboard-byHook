@@ -46,3 +46,5 @@ HEADERS += \
     Header/Helper.hpp \
     Header/dllmain.h \
     Header/getmousedata.h
+
+DISTFILES +=

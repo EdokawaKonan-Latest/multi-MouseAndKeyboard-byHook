@@ -3,6 +3,30 @@ import QtQuick.Window 2.2
 import GetMouseData 1.0
 
 Window {
+    Text {
+        y:0
+        id: text1
+        font.pointSize: 26
+        text: qsTr("text")
+    }
+    Text {
+        y:240
+        id: text2
+        font.pointSize: 26
+        text: qsTr("text")
+    }
+    Text {
+        y:480
+        id: text3
+        font.pointSize: 26
+        text: qsTr("text")
+    }
+    Text {
+        y:720
+        font.pointSize: 26
+        id: text4
+        text: qsTr("text")
+    }
     visible: true
     width: 1000
     height: 1000
@@ -66,10 +90,20 @@ Window {
             mouseFour.color = array[buttonDetect(a)];
         }
     }
+    function txtchange(p) {
+        var s =  mouseData.getKeyString(p);
+        //console.log(s, p);
+        if(p === 0) text1.text = s;
+        else if(p === 1) text2.text = s;
+        else if(p === 2) text3.text = s;
+        else if(p === 3) text4.text = s;
+    }
 
     function fuck() {
         for(var p = 0; p < 4; p++) {
             mousePositon(p);
+            txtchange(p);
+
         }
     }
     GetMouseData {

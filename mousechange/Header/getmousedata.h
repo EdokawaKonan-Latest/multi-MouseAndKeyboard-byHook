@@ -24,6 +24,7 @@ public:
     Q_INVOKABLE unsigned short getDistance(int p);
     Q_INVOKABLE int setMouse(int id, int i);
     Q_INVOKABLE int getKind(int id);
+    Q_INVOKABLE QString getKeyString(int p);
     void countAdd(int i );
 signals:
     void mouse();
